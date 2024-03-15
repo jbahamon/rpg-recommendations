@@ -1,0 +1,32 @@
+<mat-form-field>
+  <mat-label>Add a game</mat-label>
+  <input
+    type="text"
+    placeholder="Pick one"
+    aria-label="Number"
+    matInput
+    [formControl]="gameSelect"
+    [matAutocomplete]="auto"
+  />
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+    <mat-option *ngFor="let game of filteredOptions$ | async" [value]="game">
+      {{ game.name }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+
+<button
+  mat-button
+  color="primary"
+  [disabled]="!(disableButton$ | async)"
+  (click)="addGame()"
+>
+  Add
+</button>
+
+<mat-list>
+  <mat-list-item *ngFor="let game of currentlySelectedGames$ | async">
+    {{ game.name }}
+    <button mat-button (click)="removeGame(game)">Remove</button>
+  </mat-list-item>
+</mat-list>

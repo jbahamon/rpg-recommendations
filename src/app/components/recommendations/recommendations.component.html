@@ -1,0 +1,5 @@
+<mat-list>
+  <mat-list-item *ngFor="let recommendation of recommendations$ | async">
+    {{ recommendation.name }} (score: {{ recommendation.score }})
+  </mat-list-item>
+</mat-list>
